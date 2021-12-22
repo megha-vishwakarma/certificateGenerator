@@ -1,0 +1,11 @@
+from PIL import Image, ImageDraw, ImageFont
+import pandas as pd
+
+df=pd.read_excel("Name.xlsx")   #Name of excel sheet
+for index,j in df.iterrows():
+    img=Image.open("template.png")    #Template of certificate it can be in any format
+    draw=ImageDraw.Draw(img)
+    draw.text(xy=(290,580),text='{}'.format(j['Name']),fill=(0,137,209),font=ImageFont.truetype('arial.ttf',100))   #set coordinates carefully
+    draw.text(xy=(690,780),text='{}'.format(j['Subject']),fill=(0,0,102),font=ImageFont.truetype('arial.ttf',75))
+    img.save('b\{}.png'.format(j['Name']))  #location of folder where certificates are stored
+print("Certificate generated")
